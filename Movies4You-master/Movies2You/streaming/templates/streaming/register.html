@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/streaming/css/registration.css"/>
+{% endblock %}
+
+{% block content %}
+<div class="parentContainer">
+    <form class="register" id="register-form" method="post" action="{% url 'streaming:registerview' %}">
+        {% csrf_token %}
+        <div class="container">
+            <h1>REGISTER</h1>
+            <p class="p_reg" id="p_inf">Please fill in this form to create an account</p>
+            <br>
+            {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <hr>
+
+            <label for="name"><b>Name</b></label>
+            <input type="text" id="name" placeholder="Enter your Name" name="name" required>
+
+            <label for="username"><b>Username</b></label>
+            <input type="text" id="username" placeholder="Enter_a_Username(with_no_spaces)" name="username"
+                   pattern="[^\s]+" required>
+
+            <label for="email"><b>Email</b></label>
+            <input type="email" id="email" placeholder="Enter Email" name="email" required>
+
+            <label for="pass"><b>Password</b></label>
+            <input type="password" id="pass" placeholder="Enter Password" name="pass" required>
+            <hr>
+
+            <p class="p_reg">By creating an account you agree to our <a href="#">Terms & Privacy</a></p>
+            <button type="submit" class="registerbtn">Register</button>
+
+            <div class="container signin">
+                <p class="p_reg">Already have an account? <a href="{% url 'streaming:login' %}" id="a_blue">Sign in</a>
+                </p>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

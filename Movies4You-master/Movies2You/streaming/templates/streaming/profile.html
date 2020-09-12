@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/streaming/css/profile.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block extra_background %}
+{% load static%}
+<style>
+    body {
+        background: rgb(0, 234, 255);
+        background: radial-gradient(circle, rgba(0, 234, 255, 1) 0%, rgba(9, 62, 121, 1) 100%, rgba(0, 176, 255, 1) 100%);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 id="userName">PROFILE</h1>
+<h2 id="info_message"> Welcome to your profile page, {{ user.first_name }}! </h2>
+<div id="information">
+    <div id="intern">
+        <div id="data">
+            <table>
+                <tr>
+                    <td class="info">Username:</td>
+                    <td class="info">{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <td class="info">First Name:</td>
+                    <td class="info">{{ user.first_name }}</td>
+                </tr>
+                <tr>
+                    <td class="info">Last Name:</td>
+                    <td class="info">{{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <td class="info">Email:</td>
+                    <td class="info">{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td class="info">Is premium?</td>
+                    {% if user.utilizador.premium == 1 %}
+                    <td class="info">Yes</td>
+                    {% else %}
+                    <td class="info">Not yet! <a href="javascript:void(0)" onclick="showPayForm()">Become premium</a>
+                    </td>
+                    {% endif %}
+                </tr>
+            </table>
+
+            <h3 id="fb">Facebook</h3>
+            {% if facebook_login %}
+            <p class="p_message">Connected as <a href="https://facebook.com/{{ facebook_login.extra_data.id }}/"
+                                                 target="_blank">{{ facebook_login.extra_data.id }}</a></p>
+            {% if can_disconnect %}
+            <form method="post" action="{% url 'streaming:social:disconnect' 'facebook' %}">
+                {% csrf_token %}
+                <button type="submit" class="dis_facebook">Disconnect from Facebook</button>
+            </form>
+            {% else %}
+            <button type="button" class="dis_facebook" disabled>Disconnect from Facebook</button>
+            <p style="color: white">You must <a href="javascript:changePassword();">define a password</a> for your account before disconnecting from Facebook.</p>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'streaming:social:begin' 'facebook' %}" id="con_facebook">
+                <i class="fa fa-facebook fa-fw"></i> Connect to Facebook
+            </a>
+            <br>
+            <br>
+            {% endif %}
+        </div>
+        <div id="img_container">
+            {% load static %}
+            <img src="{{ user.utilizador.profile_img }}" width="180" height="180" id="profile_img">
+            <form method="post" enctype="multipart/form-data" action="{% url 'streaming:profile' %}">
+                {% csrf_token %}
+                <input type="file" name="profile_image">
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+        <br>
+        <div id="hidden" style="display: none">
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td><label for="first_name">New First Name: </label></td>
+                        <td><input type="text" id="first_name" name="first_name" placeholder="Enter a new first name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="last_name">New Last Name: </label></td>
+                        <td><input type="text" id="last_name" name="last_name" placeholder="Enter a new last name"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email_add">New Email: </label></td>
+                        <td><input type="email" id="email_add" name="email_add" placeholder="Enter a new email"></td>
+                    </tr>
+                </table>
+
+
+                <input type="submit" value="Save changes" class="btn_form" formaction="{% url 'streaming:profile' %}">
+                <input type="button" name="changePasswd" id="changePasswd" value="Change Password" class="btn_form"
+                       onclick="changePassword()">
+            </form>
+        </div>
+        <div id="hidden_1" style="display: none">
+            <form name="Passwd" method="post">
+                {% csrf_token %}
+                <table>
+                    {% if user.has_usable_password %}
+                    <tr>
+                        <td><label for="old_passwd">Old Password: </label></td>
+                        <td><input type="password" id="old_passwd" name="old_passwd" placeholder="Enter Old Password">
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td><label for="new_passwd">New Password: </label></td>
+                        <td><input type="password" id="new_passwd" name="new_passwd" placeholder="Enter New Password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="new_passwd_conf">New Password (Confirm): </label></td>
+                        <td><input type="password" id="new_passwd_conf" name="new_passwd_conf"
+                                   placeholder="Enter New Password Again"></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Save changes" class="btn_form"
+                       formaction="{% url 'streaming:profile' %}">
+            </form>
+        </div>
+
+        <div class="row" id="hidden_2" style="display: none">
+            <div class="col-50">
+                <div class="container">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-50">
+                                <h3>Billing Address</h3>
+                                <label for="fname" class="pay_form"><i class="fa fa-user"></i> Full Name</label>
+                                <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+                                <label for="email" class="pay_form"><i class="fa fa-envelope"></i> Email</label>
+                                <input type="text" id="email" name="email" placeholder="john@example.com">
+                                <label for="adr" class="pay_form"><i class="fa fa-address-card-o"></i> Address</label>
+                                <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                                <label for="city" class="pay_form"><i class="fa fa-institution"></i> City</label>
+                                <input type="text" id="city" name="city" placeholder="New York">
+                                <label for="state" class="pay_form">State</label>
+                                <input type="text" id="state" name="state" placeholder="NY">
+                                <label for="zip" class="pay_form">Zip</label>
+                                <input type="text" id="zip" name="zip" placeholder="10001">
+
+                                <h3>Payment</h3>
+                                <label for="fname" class="pay_form">Accepted Cards</label>
+                                <div class="icon-container">
+                                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                </div>
+                                <label for="cname" class="pay_form">Name on Card</label>
+                                <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                                <label for="ccnum" class="pay_form" id="label_ccnum">Credit card number</label>
+                                <input type="text" id="ccnum" name="cardnumber" pattern="[0-9]{13,16}" required
+                                       placeholder="1111-2222-3333-4444">
+                                <div class="date-field">
+                                    <table>
+                                        <tr>
+                                            <td id="exp_month">Exp Month</td>
+                                            <td id="exp_year">Exp Year</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select id="expmonth" name="Month">
+                                                    <option value="january">January</option>
+                                                    <option value="february">February</option>
+                                                    <option value="march">March</option>
+                                                    <option value="april">April</option>
+                                                    <option value="may">May</option>
+                                                    <option value="june">June</option>
+                                                    <option value="july">July</option>
+                                                    <option value="august">August</option>
+                                                    <option value="september">September</option>
+                                                    <option value="october">October</option>
+                                                    <option value="november">November</option>
+                                                    <option value="december">December</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="expyear" name="Year">
+                                                    <option value="2019">2019</option>
+                                                    <option value="2020">2020</option>
+                                                    <option value="2021">2021</option>
+                                                    <option value="2022">2022</option>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2024">2024</option>
+                                                    <option value="2025">2025</option>
+                                                    <option value="2026">2026</option>
+                                                    <option value="2027">2027</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <label for="cvv" class="pay_form" id="label_cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="352" pattern="[0-9]{3}" required>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="container container_1">
+                                <h4>Cart
+                                    <span class="price" style="color:black">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <b>1</b>
+                                    </span>
+                                </h4>
+                                <p><a href="#">Movies2You PREMIUM (1 month subscription)</a> <span
+                                        class="price">€15</span></p>
+                                <hr>
+                                <p>Total <span class="price" style="color:black"><b>€15</b></span></p>
+                            </div>
+                        </div>
+                        <input type="submit" value="Continue to checkout" class="btn"
+                               formaction="{% url 'streaming:profile' %}">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if message %}
+        <p><strong>{{ message }}</strong></p>
+        {% endif %}
+        <input type="button" name="edit" id="edit" value="Edit" class="btn_form" onclick="showHidden()">
+        <input type="button" name="cancel" id="cancel" value="Cancel" class="btn_form" style="display: none"
+               onclick="cancel()">
+        {% if user.is_superuser %}
+        <div class="admin">
+            <button name="add_movie" id="admin_site" class="btn" onclick="location.href='{% url 'admin:index' %}'">Admin
+                Site
+            </button>
+            <button name="add_movie" id="add_movie" class="btn" onclick="location.href='/admin/streaming/movie/add/'">
+                Add Movie
+            </button>
+            <button name="add_movie" id="man_movie" class="btn" onclick="location.href='/admin/streaming/movie/'">Manage
+                Movies
+            </button>
+            <button name="ger_users" id="man_movies" class="btn"
+                    onclick="location.href='{% url 'admin:auth_user_changelist' %}'">Manage Users
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endif %}
+
+<script>
+    function showHidden() {
+        document.getElementById('hidden').style.display = "block";
+        document.getElementById('edit').style.display = "none";
+        document.getElementById('cancel').style.display = "block";
+    }
+
+    function cancel() {
+        document.getElementById('hidden').style.display = "none";
+        document.getElementById('edit').style.display = "block";
+        document.getElementById('hidden_1').style.display = "none";
+        document.getElementById('cancel').style.display = "none";
+        document.getElementById('hidden_2').style.display = "none";
+    }
+
+    function changePassword() {
+        document.getElementById('hidden_1').style.display = "block";
+        document.getElementById('cancel').style.display = "block";
+        document.getElementById('edit').style.display = "none";
+        document.getElementById('hidden').style.display = "none";
+        document.getElementById('hidden_2').style.display = "none";
+    }
+
+    function showPayForm() {
+        document.getElementById('hidden_2').style.display = "block";
+        document.getElementById('hidden').style.display = "none";
+        document.getElementById('edit').style.display = "none";
+        document.getElementById('hidden_1').style.display = "none";
+        document.getElementById('edit').style.display = "none";
+        document.getElementById('cancel').style.display = "block";
+    }
+
+</script>
+
+{% endblock %}
+
+

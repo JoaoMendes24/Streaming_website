@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/streaming/css/login.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+    var alerta = {{ alerta }};
+    var error_message = "{{ error_message }}";
+    if (alerta == 0) {
+        alert(error_message);
+    }
+</script>
+
+{% endblock %}
+{% block content %}
+<div class="parentContainer">
+    <h1>LOGIN</h1>
+    <div class="container">
+        <form class="login" id="login-form" method="post"
+              action="{% url 'streaming:loginview' %}">
+            {% csrf_token %}
+            <input id="id_username" name="username"
+                   type="text" placeholder="Enter Username" class="form-control" required>
+            <input id="id_password" name="password"
+                   type="password" placeholder="Enter Password" class="form-control" required>
+            <button type="submit" class="log_b" autofocus="autofocus">LOGIN</button>
+            <button type="button" class="red_b" onclick="location.href='{% url 'streaming:register' %}'">
+                Register
+            </button>
+            <p>OR</p>
+            <a href="{% url 'streaming:social:begin' 'facebook' %}" class="btn">
+                <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

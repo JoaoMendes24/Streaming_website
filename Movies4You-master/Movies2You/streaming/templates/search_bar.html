@@ -1,0 +1,18 @@
+{% csrf_token %}
+<input name="nome" placeholder="Search" value="">
+<select name="genero">
+    <option value="0" selected>All</option>
+    <option value="Action">Action</option>
+    <option value="Animation">Animation</option>
+    <option value="Adventure">Adventure</option>
+    <option value="Comedy">Comedy</option>
+    <option value="Sport">Sport</option>
+    <option value="Drama">Drama</option>
+    <option value="Fantasy">Fantasy</option>
+    <option value="Romance">Romance</option>
+</select>
+<select name="order">
+    <option value="1" selected>Added</option>
+    <option value="2">Score</option>
+</select>
+<button class="btn btn-primary btnsearch" type="submit">Search</button>

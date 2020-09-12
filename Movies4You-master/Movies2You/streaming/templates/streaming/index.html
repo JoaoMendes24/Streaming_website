@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/streaming/css/catalog.css"/>
+{% endblock %}
+{% block content %}
+<h2 class="heading">Recently Added</h2>
+<br>
+<div class="row">
+    {% for movie in recent_movies %}
+    <div class="column">
+        <a href="{% url 'streaming:movie' movie.id %}">
+            <img class="resize" src={{movie.movie_img}}>
+        </a>
+        <div>
+            <a class="title" href="{% url 'streaming:movie' movie.id %}">
+                {{movie.movie_name}}
+            </a>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+<br>
+<div class="row"><h2 class="heading">Best Score</h2></div>
+<br>
+<div class="row">
+    {% for movie in top_movies %}
+    <div class="column">
+        <a href="{% url 'streaming:movie' movie.id %}">
+            <img class="resize" src={{movie.movie_img}}>
+        </a>
+        <div>
+            <a class="title" href="{% url 'streaming:movie' movie.id %}">
+                {{movie.movie_name}}
+            </a>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

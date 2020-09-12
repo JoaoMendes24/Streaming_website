@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/streaming/css/movie_video.css"/>
+{% endblock %}
+{% block content %}
+<a href="{% url 'streaming:movie' movie.id %}" class="button">Back</a>
+<div>
+    <iframe width="1300" height="520" src={{movie.movie_video}} frameborder="1" allowfullscreen="true"></iframe>
+</div>
+{% endblock %}

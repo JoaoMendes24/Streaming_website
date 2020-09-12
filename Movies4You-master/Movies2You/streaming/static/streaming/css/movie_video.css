@@ -1,0 +1,16 @@
+.button {
+    background-color: #990000;
+    border: none;
+    color: white;
+    padding: 10px 30px 14px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    margin: 10px 25px;
+    font-family: comic sans ms, serif;
+}
+
+div {
+    text-align: center;
+}

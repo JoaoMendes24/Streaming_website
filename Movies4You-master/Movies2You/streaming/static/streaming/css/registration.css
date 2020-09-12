@@ -1,0 +1,99 @@
+* {
+    font-family: 'Roboto ', sans-serif;
+}
+
+h1 {
+    display: block;
+    color: white;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.p_reg, label {
+    display: block;
+    color: black;
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+label {
+    margin-left: 5px;
+}
+
+.p_reg {
+    text-align: center;
+}
+
+.p_reg a {
+    text-decoration: none;
+    color: yellow;
+}
+
+#p_inf {
+    font-size: 1.0em;
+}
+
+.parentContainer {
+    display: flex;
+    justify-content: center;
+}
+
+form.register {
+    width: 450px;
+}
+
+.container {
+    padding: 7px;
+    border-radius: 10px;
+    background-color: rgba(0, 205, 200, 0.75);
+}
+
+input[type=text], input[type=password], input[type=email] {
+    border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background: white;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 15px;
+}
+
+.registerbtn {
+    border-radius: 5px;
+    font-weight: bolder;
+    background-color: #f60d00;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.registerbtn:hover {
+    opacity: 1;
+}
+
+.signin {
+    font-weight: normal;
+    background-color: #f1f1f1;
+    text-align: center;
+    height: 50px;
+}
+
+#a_blue {
+    color: dodgerblue;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    <title>Movies2You</title>
+    {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+    <link rel="stylesheet" href="/static/streaming/css/base.css"/>
+</head>
+<body>
+{% block extra_background %}{% endblock %}
+<div class="logo">
+    {% load static %}
+    <a href="{%url 'streaming:index' %}"> <img src="{% static 'streaming/images/img.png' %}"></a>
+</div>
+
+<nav id="nav1">
+    <ul id="ul_1">
+        <li class="li_geral"><a href="{% url 'streaming:catalog' %}">Catalog</a></li>
+        <li class="li_geral"><a href="{% url 'streaming:premium' %}">Premium</a></li>
+        {% if user.is_authenticated %}
+        <li class="li_geral">
+            <div class="dropdown">
+                <span class="inline"><a class="dropbtn">{{ user.username }}</a></span>
+                <span class="inline"><img src="{{ user.utilizador.profile_img }}" width="36" height="36"
+                                          id="img"></span>
+                <div class="dropdown-content">
+                    <a class="nav-a" href="{% url 'streaming:profile' %}">Profile</a>
+                    <a class="nav-a" href="{% url 'streaming:logout' %}">Log out</a>
+                </div>
+            </div>
+        </li>
+        {% else %}
+        <li class="li_geral">
+            <div class="dropdown">
+                <a class="dropbtn">Login</a>
+                <div class="dropdown-content">
+                    <a class="nav-a" href="{% url 'streaming:login' %}">Login</a>
+                    <a class="nav-a" href="{% url 'streaming:register' %}">Register</a>
+                </div>
+            </div>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+
+<footer>
+    <div id="expand-box-header">
+        <span class="information" id="contact">Contact: django.pr19@gmail.com</span>
+        <span id="css_check"><a href="http://jigsaw.w3.org/css-validator/check/referer">
+            <img style="border:0;width:88px;height:31px"
+                 src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                 alt="CSS válido!"/></a></span>
+        <span class="information" id="django_f">Made with Django Framework</span>
+        <span class="information" id="copyright">Movies2You © 2019</span>
+    </div>
+</footer>
+</html>

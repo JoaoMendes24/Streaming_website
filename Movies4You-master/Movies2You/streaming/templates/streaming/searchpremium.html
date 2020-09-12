@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/streaming/css/catalog.css"/>
+{% endblock %}
+{% block content %}
+<section>
+    <div class="search">
+        <form method="post" action="{% url 'streaming:searchpremium' %}" accept-charset="UTF-8">
+            {% include 'search_bar.html' %}
+        </form>
+    </div>
+</section>
+<div class="row">
+    {% for movie in all_movies %}
+    {% if movie.premium == 1 %}
+    {% if genre in movie.movie_genre and name in movie.movie_name %}
+    <div class="column">
+        <a href="{% url 'streaming:movie' movie.id %}">
+            <img class="resize" src={{movie.movie_img}}>
+        </a>
+        <div>
+            <a class="title" href="{% url 'streaming:movie' movie.id %}">
+                {{movie.movie_name}}
+            </a>
+        </div>
+    </div>
+
+    {% elif name in movie.movie_name and genre == '0' %}
+    <div class="column">
+        <a href="{% url 'streaming:movie' movie.id %}">
+            <img class="resize" src={{movie.movie_img}}>
+        </a>
+        <div>
+            <a class="title" href="{% url 'streaming:movie' movie.id %}">
+                {{movie.movie_name}}
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    {% endfor %}
+
+</div>
+{% endblock %}

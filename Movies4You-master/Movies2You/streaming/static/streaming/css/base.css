@@ -1,0 +1,134 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 5rem;
+    min-height: 100%;
+    background-image: url("http://creawoodworking.com/wp-content/uploads/2017/11/black_background_wood_i-wallpaper-2560x1600.jpg");
+}
+
+.logo img {
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 5px;
+}
+
+#nav1 {
+    width: 100%;
+    background: black;
+    overflow: auto;
+}
+
+#nav1 a {
+    width: 100px;
+    display: block;
+    padding: 20px 15px;
+    text-decoration: none;
+    font-family: Arial, serif;
+    color: #f2f2f2;
+    text-align: center;
+}
+
+#nav1 a:hover {
+    background: #384ba4;
+    transition: 0.5s;
+    text-transform: uppercase;
+}
+
+#ul_1 {
+    padding: 0;
+    margin: 0 0 0 150px;
+    list-style: none;
+}
+
+ul:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+li {
+    float: left;
+}
+
+li:last-child {
+    float: right;
+}
+
+footer {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 4px;
+    background: rgba(235, 235, 224, 0.3);
+}
+
+.information {
+    margin-top: 6px;
+    color: white;
+}
+
+#contact {
+    margin-left: 5px;
+    float: left;
+}
+
+#copyright {
+    margin-left: 350px;
+}
+
+#django_f, #css_check {
+    float: right;
+    margin-left: 10px;
+}
+
+.inline {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#img {
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    border: none;
+    outline: none;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #00a8b9;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-content  {
+    display: block;
+}

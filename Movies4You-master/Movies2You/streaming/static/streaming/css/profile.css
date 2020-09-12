@@ -1,0 +1,182 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+#information {
+    margin-left: 10px;
+}
+
+#userName {
+    text-align: center;
+    color: black;
+    background: rgba(235, 235, 224, 0.3);
+}
+
+.container {
+    background-color: rgba(242, 240, 238, 0.75);
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+.container_1 {
+    width: 98%;
+}
+
+.admin {
+    width: 24%;
+    position: absolute;
+    top: 148px;
+    left: 510px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 3px solid #cebb00;
+    background-color: rgba(72, 234, 204, 0.33);
+}
+
+#img_container {
+    position: absolute;
+    top: 140px;
+    left: 900px;
+    padding: 8px;
+    border-radius: 15px;
+    border: 3px solid #cebb00;
+    text-align: center;
+    background-color: rgba(72, 234, 204, 0.33);
+}
+
+#profile_img {
+    border-radius: 150px;
+    border: 10px solid #009e30;
+}
+
+#info_message {
+    margin-left: 10px;
+    color: #f9f9f9;
+}
+
+#hidden_2 {
+    width: 99%;
+}
+
+.col-50 {
+    padding: 0 30px;
+}
+
+.pay_form {
+    width: 100%;
+}
+
+#fb {
+    color: white;
+}
+
+input[type=text], [type=email], [type=password] {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#ccnum, #label_ccnum {
+    width: 24%;
+}
+
+#cvv, #label_cvv {
+    width: 14%;
+}
+
+label, .info, .p_message {
+    background: rgba(235, 235, 224, 0.3);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 7px;
+}
+
+.p_message {
+    width: 20%;
+}
+
+label {
+    display: block;
+}
+
+.icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+}
+
+.btn {
+    background-color: #af9900;
+    color: white;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+span.price {
+    float: right;
+    color: #4a4a4a;
+}
+
+#expmonth, #expyear {
+    height: 40px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    border: 1px solid #e1e8ee;
+    border-radius: 5px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bolder;
+    padding: 5px 13px;
+    margin: 5px 5px;
+    color: white;
+    background-color: #bb1100;
+}
+
+.btn_form {
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bolder;
+    padding: 10px 20px;
+    margin: 5px 5px;
+    color: white;
+    background-color: #09900b;
+}
+
+button:hover .btn_form:hover {
+    opacity: 0.8;
+}
+
+#cancel {
+    background-color: #bb1100;
+}
+
+#con_facebook {
+    background-color: #3B5998;
+    color: white;
+    text-decoration-line: none;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    padding: 7px;
+}
+
+.dis_facebook {
+    background-color: #b72100;
+}
+
